@@ -1,4 +1,4 @@
-public class Baum1
+public class Baum
 {
   
      public static void printBaumRahmen(int hohe)
