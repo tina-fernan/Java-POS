@@ -92,7 +92,7 @@ public class School
         }
     }
 
-    public void aufnehemen(Student neu)
+    public void anmelden(Student neu)
     {
 
         if(neu != null)
