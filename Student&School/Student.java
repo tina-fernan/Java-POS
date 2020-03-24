@@ -5,6 +5,13 @@ public class Student
     private boolean mannlich;
     private School school;
 
+    public Student(String name, int alter, boolean mannlich)
+    {
+        setName(name);
+        setAlter(alter);
+        setMannlich(mannlich);
+    }
+    
     public Student()
     {
         setName("Thomas Gr");
@@ -12,12 +19,7 @@ public class Student
         setMannlich(true);
     }
 
-    public Student(String name, int alter, boolean mannlich)
-    {
-        setName(name);
-        setAlter(alter);
-        setMannlich(mannlich);
-    }
+    
 
     public void setName(String name)
     {
