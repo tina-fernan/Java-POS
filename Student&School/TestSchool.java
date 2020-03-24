@@ -1,6 +1,6 @@
 public class TestSchool
 {
-    public void TestabAnmelden()
+    public void TestAnmelden()
 {
    School spg;
    Student s0,s1,s2,s3,s4,s5;
