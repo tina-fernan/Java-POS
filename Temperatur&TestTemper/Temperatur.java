@@ -1,3 +1,4 @@
+
 public class Temperatur
 {
     private double[] temperatur;
@@ -7,8 +8,8 @@ public class Temperatur
     {
 
         temperatur=new double[10];
-        setAnzahltage(365);
-
+        
+        anzahlTage=0;
     }
 
     public void fulleTestdaten()
@@ -23,6 +24,7 @@ public class Temperatur
         temperatur[7]=22.5;
         temperatur[8]=0;
         temperatur[9]=0;
+        anzahlTage=8;
 
     }
 
@@ -31,53 +33,46 @@ public class Temperatur
         return anzahlTage;
     }
 
-    public void setAnzahltage(int anzahlTage)
-    {
-        if(anzahlTage >= 0 && anzahlTage<=365)
-        {
-            this.anzahlTage=anzahlTage;
-
-        }
-        else
-        {
-            System.out.print("Fehler:ungültige anzahlTage!");
-            this.anzahlTage=100;
-        }
-    }
-
+    
     public void ausGeben()
     {
-        System.out.println(" maximale anzahl "+ anzahlTage);
-        for(int i=0;i<temperatur.length;i++)
+       // System.out.println(" maximale anzahl "+ anzahlTage);
+        for(int i=0;i<anzahlTage;i++)
         {
-            System.out.println("Tag"+ i + ":" +temperatur[i]+ " Tage Temperatur ");
+            System.out.print("Tag"+ i + ":" +temperatur[i]+ "\t");
+            
+            for(int j=1; j<temperatur[i];j++)
+            {
+                System.out.print("*");
+            }
+             System.out.println();
         }
     }
     //Die Methode kaltesterTag() ermittelt jenen Tag, der den niedrigsten Wert
     //aufweist return 5
     public int kaltesterTage()
     {
-        double min=temperatur[0];
-        int minTag=0;
-        for(int i=0;i<temperatur.length;i++)
+        double min=999;
+        int minTag=-1;
+        for(int i=0;i<anzahlTage;i++)
         {
-            if(temperatur[i]!=0)
-            {
+          
+            
                 if(temperatur[i] < min)
                 {
                     min = temperatur[i];
                     minTag=i;
                 }
-            }
+            
         }
         return minTag;
     }
     //Die Methode warmstesterTag() ermittelt jenen Tag, der den höchsten Wert  return 7
     public int warmstesterTage()
     {
-        double max=temperatur[0];
-        int maxTag=0;
-        for(int i=0;i<temperatur.length;i++)
+        double max=-999;
+        int maxTag=-1;
+        for(int i=0;i<anzahlTage;i++)
         {
 
             if(temperatur[i] > max)
@@ -92,16 +87,17 @@ public class Temperatur
     //Die Methode maximalerAbfall() ermittelt den höchsten Temperaturabfall. return -5.2
     public double maximalerAbfall()
     {
-        double maxAbfall=(temperatur[1]-temperatur[0]);
+        double maxAbfall=999;
 
-        for(int i=0;i<(temperatur.length-1);i++)
+        for(int i=0;i<anzahlTage-1;i++)
         {
-            if(temperatur[i+1]!=0) {
+           
 
-                if ((temperatur[i+1]-temperatur[i]) < maxAbfall) {
+                if ((temperatur[i+1]-temperatur[i]) < maxAbfall) 
+                {
                     maxAbfall = (temperatur[i+1]-temperatur[i]);
                 }
-            }
+            
         }
         return maxAbfall;
     }
@@ -111,14 +107,14 @@ public class Temperatur
     {
        
         int anzahTage=0;
-        for(int i=0;i<temperatur.length-1;i++)
+        for(int i=0;i<anzahlTage-1;i++)
         {
-            if(temperatur[i+1]!=0){
-            if( temperatur[i+1]-temperatur[i] > 0)
+            
+            if( temperatur[i+1]>temperatur[i])
             {
                 anzahTage++;
             }
-        }
+        
         }
         return anzahTage;
     }
@@ -127,25 +123,18 @@ public class Temperatur
     //wärmsten und dem kältesten Tag.
     public double temperaturSchwankung()
     {
-        double kältesten=0;
-        double wärmsten=0;
-        double differenz=0;
-        for(int i=0;i<temperatur.length;i++)
-        {
-            if(i==kaltesterTage())
+        int kältestenPos=kaltesterTage();
+        int wärmstenPos=warmstesterTage();
+       
+        
+            if(wärmstenPos>=0 && kältestenPos>=0)
             {
-                kältesten=temperatur[i];
-            }
-
-            if(i==warmstesterTage()) 
+             return temperatur[wärmstenPos]-temperatur[kältestenPos];
+            } 
+            else
             {
-                wärmsten=temperatur[i];
-
+                return -999;
             }
-
-        }  
-        differenz = (wärmsten-kältesten);
-        return differenz;
-    }  
-
+       
+    }
 }
